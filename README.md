@@ -1,6 +1,15 @@
 # Memote
 Web Application for Cloud-based Enterprise Application Development 
 
+#### To run Frontend
+```
+yarn serve
+```
+#### To run Backend
+```
+
+```
+
 ## Member
 |   Name    |surename|  ID    |
 |-----------|--------|--------|
