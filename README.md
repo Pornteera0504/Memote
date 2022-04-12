@@ -1,11 +1,11 @@
 # Memote
 Web Application for Cloud-based Enterprise Application Development 
 
-#### To run Frontend
+### To run Frontend
 ```
 yarn serve
 ```
-#### To run Backend
+### To run Backend
 ```
 
 ```
