@@ -3,11 +3,11 @@ Web Application for Cloud-based Enterprise Application Development
 
 ### To run Frontend
 ```
-yarn serve
+yarn frontend
 ```
 ### To run Backend
 ```
-
+yarn backend
 ```
 
 ## Member

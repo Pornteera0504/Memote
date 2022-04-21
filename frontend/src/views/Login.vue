@@ -39,7 +39,7 @@
           large
           color="#8FD14F"
           class="mt-3 font-weight-bold white--text"
-          @click="validate"
+          v-on:click="login()"
         >
           Login
         </v-btn>
@@ -56,22 +56,38 @@
           large
           color="info"
           class="font-weight-bold"
-          @click="validate"
+          v-on:click="guest()"
         >
           Guest
         </v-btn>
       </v-form>
     </v-col>
+    <v-dialog v-model="registerDialog" max-width="50rem">
+      <Register :closeDialog="closeDialog" />
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
+import Register from "@/components/Register.vue";
 export default {
   name: "Login",
+  components: {
+    Register,
+  },
   data() {
     return {
       registerDialog: false,
+      email: "",
+      password: "",
     };
+  },
+  methods: {
+    closeDialog(value) {
+      this.registerDialog = value;
+    },
+    login() {},
+    guest() {},
   },
 };
 </script>
