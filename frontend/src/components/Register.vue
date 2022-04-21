@@ -1,20 +1,21 @@
 <template>
   <v-card>
-    <v-icon></v-icon>
     <v-card-text class="py-10">
-      <v-row class="d-flex flex-column justify-center align-center">
+      <v-form
+        ref="register"
+        class="d-flex flex-column justify-center align-center"
+      >
         <v-col cols="7">
           <v-text-field
             v-model="name"
-            :rules="nameRules"
+            :rules="[rules.required]"
             label="Name"
             required
             outlined
           ></v-text-field>
-
           <v-text-field
             v-model="email"
-            :rules="emailRules"
+            :rules="[rules.required, rules.email]"
             label="Email"
             required
             outlined
@@ -22,7 +23,7 @@
 
           <v-text-field
             v-model="password"
-            :rules="passwordRules"
+            :rules="[rules.required, rules.minPassword]"
             label="Password"
             required
             outlined
@@ -33,7 +34,7 @@
             block
             large
             color="#8FD14F"
-            class="mt-3 font-weight-bold white--text"
+            class="font-weight-bold white--text"
             v-on:click="register()"
           >
             Register
@@ -48,7 +49,7 @@
             Close
           </v-btn>
         </v-col>
-      </v-row>
+      </v-form>
     </v-card-text>
   </v-card>
 </template>
@@ -56,18 +57,35 @@
 <script>
 export default {
   name: "Register",
-  props: {
-    closeDialog: Function,
-  },
+  props: { closeDialog: Function },
   data() {
     return {
+      valid: "",
       name: "",
       email: "",
       password: "",
+      rules: {
+        required: (value) => !!value || "Required.",
+        minPassword: (value) => value.length >= 8 || "At least 8 characters",
+        email: (value) => {
+          const pattern =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || "Invalid e-mail.";
+        },
+      },
     };
   },
   methods: {
-    register() {},
+    register() {
+      if (this.validate()) {
+        console.log(this.validate());
+      } else {
+        console.log("false");
+      }
+    },
+    validate() {
+      return this.$refs.register.validate();
+    },
   },
 };
 </script>

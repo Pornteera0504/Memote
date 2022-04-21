@@ -1,5 +1,6 @@
 <template>
   <v-container
+    transition="expand-x-transition"
     fluid
     class="d-flex flex-column justify-center align-center my-auto"
   >
@@ -7,62 +8,66 @@
       Memote
     </h1>
     <v-col cols="4">
-      <v-form
-        class="d-flex flex-column align-center"
-        ref="form"
-        v-model="valid"
-      >
-        <v-col cols="12">
+      <v-form class="d-flex flex-column align-center" ref="login">
+        <v-col cols="12" class="pb-0 mb-0">
           <v-text-field
+            class="text-h6"
             v-model="email"
-            :rules="emailRules"
             label="Email"
             required
             outlined
-            hide-details
+            :rules="[rules.required, rules.email]"
           ></v-text-field>
         </v-col>
-        <v-col cols="12">
+        <v-col cols="12" class="py-0">
           <v-text-field
+            class="text-h6"
             v-model="password"
-            :rules="passwordRules"
             label="Password"
             required
             outlined
-            hide-details
             hint="At least 8 characters"
             type="password"
+            :rules="[rules.required, rules.minPassword]"
           ></v-text-field>
         </v-col>
-        <v-btn
-          block
-          large
-          color="#8FD14F"
-          class="mt-3 font-weight-bold white--text"
-          v-on:click="login()"
-        >
-          Login
-        </v-btn>
-
-        <p class="text-caption">
-          Not a member?
-          <a @click="registerDialog = true" class="text-decoration-none"
-            >Create account</a
+        <v-col cols="12" class="d-flex flex-column align-center pt-0">
+          <v-btn
+            block
+            large
+            color="#8FD14F"
+            class="mt-3 font-weight-bold white--text"
+            v-on:click="login()"
           >
-        </p>
+            Login
+          </v-btn>
 
-        <v-btn
-          block
-          large
-          color="info"
-          class="font-weight-bold"
-          v-on:click="guest()"
-        >
-          Guest
-        </v-btn>
+          <p class="text-subtitle-1">
+            Not a member?
+            <a
+              v-on:click="registerDialog = true"
+              class="text-decoration-none hover-darker"
+              >Create Account</a
+            >
+          </p>
+
+          <v-btn
+            block
+            large
+            color="info"
+            class="font-weight-bold"
+            v-on:click="guest()"
+          >
+            Guest
+          </v-btn>
+        </v-col>
       </v-form>
     </v-col>
-    <v-dialog v-model="registerDialog" max-width="50rem">
+    <v-dialog
+      transition="scale-transition"
+      v-model="registerDialog"
+      max-width="50rem"
+    >
       <Register :closeDialog="closeDialog" />
     </v-dialog>
   </v-container>
@@ -80,14 +85,39 @@ export default {
       registerDialog: false,
       email: "",
       password: "",
+      rules: {
+        required: (value) => !!value || "Required.",
+        minPassword: (value) => value.length >= 8 || "At least 8 characters",
+        email: (value) => {
+          const pattern =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || "Invalid e-mail.";
+        },
+      },
     };
   },
   methods: {
     closeDialog(value) {
       this.registerDialog = value;
     },
-    login() {},
+    login() {
+      if (this.validate()) {
+        console.log(this.validate());
+      } else {
+        console.log("false");
+      }
+    },
     guest() {},
+    validate() {
+      return this.$refs.login.validate();
+    },
   },
 };
 </script>
+
+<style scoped>
+.hover-darker:hover {
+  filter: brightness(70%);
+  text-decoration: underline !important;
+}
+</style>
