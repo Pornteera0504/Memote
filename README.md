@@ -3,11 +3,13 @@ Web Application for Cloud-based Enterprise Application Development
 
 ### To run Frontend
 ```
-yarn serve
+yarn install:frontend
+yarn frontend
 ```
 ### To run Backend
 ```
-
+yarn install:backend
+yarn backend
 ```
 
 ## Member
