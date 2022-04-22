@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
-const testApi = require('./testApi')
+const userRouter = require('./userRouter')
 
-router.use(testApi)
+router.use(userRouter)
 
 /// เพื่อดูสถานะการทำ Router ตรงนี้ว่าสำเร็จไหม
 router.use('/server-status', (req, res) => {
