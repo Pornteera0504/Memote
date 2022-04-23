@@ -33,7 +33,7 @@ const allTask = async (req, res) => {
         if(userID === undefined) return res.status(400).send("UserID not define.")
     
         try {
-          const querySql = "SELECT * FROM tasks WHERE userID = ?"
+          const querySql = "SELECT taskID, name, activityDate, lastEditDate FROM tasks WHERE userID = ?"
           const [rows, _] = await conn.query(querySql, [userID])
           res.status(200).json(rows)
     
