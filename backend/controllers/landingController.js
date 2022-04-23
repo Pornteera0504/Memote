@@ -51,4 +51,33 @@ const allTask = async (req, res) => {
     }
 }
 
-module.exports = { categories, allTask }
+const categoryTask = async (req, res) => {
+    try {
+        const conn = await pool.getConnection()
+        await conn.beginTransaction()
+
+        const userID = req.body.userID
+        const categoryID = req.body.categoryID
+        if(userID === undefined) return res.status(400).send("UserID not define.")
+        if(categoryID === undefined) return res.status(400).send("CategoryID not define.")
+    
+        try {
+          const querySql = "SELECT taskID, tasks.name, description, activityDate, lastEditDate, categories.name FROM tasks join categories on tasks.categoryID = categories.categoryID WHERE userID = ? and tasks.categoryID = ?"
+          const [rows, _] = await conn.query(querySql, [userID, categoryID])
+          res.status(200).json(rows)
+    
+          await conn.commit()
+          return rows
+        } catch (error) {
+          await conn.rollback()
+          return res.status(500).send("[Category task module] Can not get task that matching with user and category")
+        } finally {
+          conn.release()
+        }
+
+      } catch (error) {
+        return res.status(500).send("[Category task module] Can not get database connection")
+    }
+}
+
+module.exports = { categories, allTask, categoryTask }
