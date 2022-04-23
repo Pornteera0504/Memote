@@ -49,8 +49,9 @@ const registerUser = async (req, res) => {
   try {
     const querySql = "INSERT INTO users(userName, email, status, password) VALUES (?, ?, ?, ?)"
     await conn.query(querySql, [userName, email, "offline", password])
-    conn.commit()
-    res.status(201).send("Register Success")
+    res.status(200).send("Register Success")
+
+    await conn.commit()
     return {}
   } catch (error) {
     conn.rollback()
@@ -91,7 +92,7 @@ const loginUser = async (req, res) => {
       const querySql = "SELECT * FROM users WHERE email = ?"
       const [resRow, _] = await conn.query(querySql, [email])
 
-      return res.status(200).json({
+      res.status(200).json({
         state: true,
         message: "Login success",
         userName: resRow[0].userName,
@@ -99,9 +100,10 @@ const loginUser = async (req, res) => {
         status: resRow[0].status,
       })
     } else if (rows.length === 1) {
-      return res.status(400).json({ state: false, reason: "Password incorrect" })
+      res.status(400).json({ state: false, reason: "Password incorrect" })
     }
     await conn.commit()
+    return {}
   } catch (err) {
     await conn.rollback()
     console.log(err)
@@ -125,13 +127,14 @@ const logoutUser = async (req, res) => {
 
     const querySql = "SELECT * FROM users WHERE userName = ?"
     const [resRow, _] = await conn.query(querySql, [userName])
-
-    return res.status(200).json({
+    res.status(200).json({
       state: true,
       message: "Logout success",
       userName: resRow[0].userName,
       status: resRow[0].status,
     })
+    await conn.commit()
+    return {}
   } catch (err) {
     return res.status(500).json({
       state: false,
