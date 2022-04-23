@@ -49,8 +49,8 @@ const registerUser = async (req, res) => {
   try {
     const querySql = "INSERT INTO users(userName, email, status, password) VALUES (?, ?, ?, ?)"
     await conn.query(querySql, [userName, email, "offline", password])
-    res.status(201).send("Register Success")
-    
+    res.status(200).send("Register Success")
+
     await conn.commit()
     return {}
   } catch (error) {
