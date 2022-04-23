@@ -43,8 +43,7 @@ const registerUser = async (req, res) => {
     try{
         await registerSchema.validateAsync(req.body, { abortEarly: false })
     }catch(error){
-        res.status(400).json(error.toString())
-        return {}
+        return res.status(400).json(error.toString())
     }
 
     const conn = await pool.getConnection()
@@ -54,20 +53,75 @@ const registerUser = async (req, res) => {
     const email = req.body.email
 
     try{
-        await conn.query(
-        'INSERT INTO users(userName, email, status, password) ' +
-        'VALUES (?, ?, ?, ?)',
-        [userName, email, "offline", password]
+        const querySql = 'INSERT INTO users(userName, email, status, password) VALUES (?, ?, ?, ?)'
+        await conn.query(querySql, [userName, email, "offline", password]
     )
         conn.commit()
         res.status(201).send("Register Success")
     }catch(error){
         conn.rollback()
-        res.status(400).send("[Register module] Something went wrong. & Register failure")
+        res.status(500).send("[Register module] Something went wrong. & Register failure")
     }finally {
         conn.release()
         return {}
     }
 }
 
-module.exports = { registerUser }
+const verifyPassword = async (password, hash) => {
+    return await bcrypt.compare(password, hash);
+  }
+const loginSchema = Joi.object({
+    email: Joi.string().required(),
+    password: Joi.string().required()
+  })
+const loginUser = async (req, res) => {
+    try {
+            await loginSchema.validateAsync(req.body, { abortEarly: false })
+    } catch (err) {
+            return res.status(400).send(err)
+    }
+
+    const conn = await pool.getConnection()
+    await conn.beginTransaction();
+    const email = req.body.email
+    const password = req.body.password
+    
+    try{
+        const querySql = 'SELECT * FROM users WHERE email = ?'
+        const [rows, _] = await conn.query(querySql, [email])
+        matched = await verifyPassword(password, rows[0].password)
+
+        if (rows.length === 1 && matched) {
+            const updateSql = 'UPDATE users SET status = ? WHERE userID = ?'
+            await conn.query(updateSql, ['online', rows[0].userID])
+
+            const querySql = 'SELECT * FROM users WHERE email = ?'
+            const [resRow, _] = await conn.query(querySql, [email])
+
+            return res.status(200).json({ state: true,
+                                          message: "Login success",
+                                          userName: resRow[0].userName,
+                                          userID: resRow[0].userID,
+                                          status: resRow[0].status
+                                        });
+        }
+        else if (rows.length === 1){
+            return res.status(400).json({ state: false,
+                                          reason: "Password incorrect",
+                                        });
+        }
+        await conn.commit()
+
+    }catch(err){
+        await conn.rollback();
+        console.log(err)
+        return res.status(500).json({ state: false,
+                                      reason: "[Login module] Something went wrong. & Login failure"
+                                    })
+    }finally{
+        conn.release()
+        return {}
+    }
+}
+
+module.exports = { registerUser, loginUser }
