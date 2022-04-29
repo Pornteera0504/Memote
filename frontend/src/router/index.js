@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
-import Landing from "../views/Landing.vue"
+import Landing from "../views/Landing.vue";
+import Edit from "../views/Edit.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/main",
     name: "Main",
     component: Landing,
+  },
+  {
+    path: "/edit",
+    name: "Edit",
+    component: Edit,
   },
 ];
 
