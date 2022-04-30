@@ -56,6 +56,7 @@
     </v-card-text>
   </v-card>
 </template>
+
 <script>
 import axios from "@/plugins/axios";
 export default {
@@ -93,7 +94,7 @@ export default {
               alert(res.data);
               localStorage.setItem("user", data.userName);
               this.$emit("changeStatus", true);
-              this.$router.push({ path: "/" });
+              this.closeDialog(false)
             })
             .catch((err) => {
               alert(err.response.data);

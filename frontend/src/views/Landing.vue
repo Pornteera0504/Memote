@@ -129,7 +129,7 @@ export default {
     },
     async getTask() {
       await axios
-        .post("/all/tasks", { userID: 3 })
+        .post("/all/tasks", { userID: localStorage.getItem("userID") })
         .then((response) => (this.tasks = response.data));
     },
   },

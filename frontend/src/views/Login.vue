@@ -120,9 +120,8 @@ export default {
           .then((res) => {
             console.log(res);
             this.changeStatus(true);
-            const userName = res.data.userName;
-            console.log(res.data.message);
-            localStorage.setItem("user", userName);
+            localStorage.setItem("user", res.data.userName);
+            localStorage.setItem("userID", res.data.userID);
             this.$router.push({ path: "/" });
           })
           .catch((err) => {
@@ -138,6 +137,7 @@ export default {
     },
     guest() {
       localStorage.setItem("user", "guest");
+      localStorage.setItem("userID", 0); //set guest user to id 0
       this.changeStatus(true);
       this.$router.push({ path: "/" });
     },
