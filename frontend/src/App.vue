@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Navigation :isLogin="isLogin" :user="user"/>
+    <Navigation :isLogin="isLogin" :user="user" v-show="isLogin"/>
     <router-view />
     <v-footer app>
       Memote
@@ -16,14 +16,11 @@ export default {
   components: {
     Navigation
   },
-  // props: {
-  //   isLogin: {status: Boolean, require: true}
-  // }
   data() {
     return{
-      isLogin: true,
-      user: "User 1"
+      isLogin: false,
+      user: "Guest"
     }
-  }
+  },
 }
 </script>
