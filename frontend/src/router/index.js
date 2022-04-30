@@ -4,6 +4,7 @@ import Login from "../views/Login.vue";
 import Landing from "../views/Landing.vue";
 import Edit from "../views/Edit.vue";
 import Tasks from "../views/Tasks.vue";
+import Detail from "../views/Detail.vue";
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ const routes = [
     name: "Tasks",
     component: Tasks,
     props: true,
+  },
+  {
+    path: "/detail",
+    name: "Detail",
+    component: Detail,
   },
 ];
 
