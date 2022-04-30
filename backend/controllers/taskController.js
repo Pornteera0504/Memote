@@ -22,10 +22,8 @@ const taskDetail = async (req, res) => {
         } finally {
             conn.release()
         }
-
     } catch (error) {
         return res.status(500).send("[Get task detail module] Can not get database connection")
-
     }
 }
 
@@ -37,7 +35,6 @@ const validateCategory = async (categoryName,conn) => {
     const categoryID =  row[0].categoryID
     return categoryID
 }
-
 const modifyTask = async (req, res) => {
     try {
         const conn = await pool.getConnection()
@@ -91,4 +88,28 @@ const modifyTask = async (req, res) => {
     }
 }
 
-module.exports = { taskDetail, modifyTask }
+const deleteTask = async (req, res) => {
+    try {
+        const conn = await pool.getConnection()
+        await conn.beginTransaction()
+        const taskID = req.body.taskID
+        if(taskID === undefined) return res.status(404).send("Task id is not define")
+
+        try {
+            const deleteSql = "DELETE FROM tasks WHERE taskID = ?"
+            await conn.query(deleteSql, [taskID])
+            res.status(200).send("Delete task data success.")
+
+            await conn.commit()
+            return {}
+        } catch (error) {
+            await conn.rollback()
+            return res.status(500).send("[Delete task module] Can not delete task data.")
+        } finally {
+            conn.release()
+        }
+    } catch (error) {
+        return res.status(500).send("[Delete task module] Can not get database connection")
+    }
+}
+module.exports = { taskDetail, modifyTask, deleteTask }
