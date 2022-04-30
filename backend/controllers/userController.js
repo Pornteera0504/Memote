@@ -69,6 +69,8 @@ const loginSchema = Joi.object({
   password: Joi.string().required(),
 })
 const loginUser = async (req, res) => {
+  //User3User3
+  //User4User4
   try {
     await loginSchema.validateAsync(req.body, { abortEarly: false })
   } catch (err) {
