@@ -23,6 +23,7 @@ const routes = [
     name: "Edit",
     component: Edit,
   },
+  {
     path: "/category/:name",
     name: "Tasks",
     component: Tasks,
