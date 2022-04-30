@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navigation />
     <v-row class="mx-10 my-5">
       <v-col col="12" class="mt-3 d-flex justify-space-between">
         <p class="text-h3 font-weight-black">{{ $route.params.name }}</p>
@@ -24,13 +23,11 @@
   </div>
 </template>
 <script>
-import Navigation from "@/components/Navigation.vue";
 import Task from "@/components/Task.vue";
 
 export default {
   name: "Tasks",
   components: {
-    Navigation,
     Task,
   },
   data() {

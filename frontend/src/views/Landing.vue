@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navigation :isLogin="isLogin" />
     <v-row class="my-5 mx-5">
       <v-col cols="12">
         <h1>
@@ -72,14 +71,12 @@
   </div>
 </template>
 <script>
-import Navigation from "@/components/Navigation.vue";
 import CardType from "@/components/CardType.vue";
 import History from "@/components/History.vue";
 
 export default {
   name: "Landing",
   components: {
-    Navigation,
     CardType,
     History,
   },

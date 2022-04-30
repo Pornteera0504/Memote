@@ -20,7 +20,7 @@
       <template v-if="isLogin === true">
         <v-btn icon class="mx-2">
           <v-icon>mdi-account-circle</v-icon>
-          <span>User 1</span>
+          <span>{{ user }}</span>
         </v-btn>
 
         <v-btn icon disabled>
@@ -79,13 +79,13 @@
 <style scoped>
 a {
   text-decoration: none;
-  color: white;
+  color: white !important;
 }
 </style>
 <script>
 export default {
   name: "Navigation",
-  props: { isLogin: Boolean },
+  props: { isLogin: Boolean, user: String},
   data() {
     return {
       logoutDialog: false,
