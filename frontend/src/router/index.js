@@ -9,12 +9,12 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     component: Login,
   },
   {
-    path: "/main",
+    path: "/",
     name: "Main",
     component: Landing,
   },
@@ -27,8 +27,8 @@ const routes = [
     path: "/category/:name",
     name: "Tasks",
     component: Tasks,
-    props: true
-  }
+    props: true,
+  },
 ];
 
 const router = new VueRouter({

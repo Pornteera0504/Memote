@@ -58,7 +58,6 @@
             large
             color="info"
             class="font-weight-bold"
-            href="/main"
             v-on:click="guest()"
           >
             Guest
@@ -71,13 +70,14 @@
       v-model="registerDialog"
       max-width="50rem"
     >
-      <Register :closeDialog="closeDialog" />
+      <Register @changeStatus="changeStatus(true)" :closeDialog="closeDialog" />
     </v-dialog>
   </v-container>
 </template>
 
 <script>
 import Register from "@/components/Register.vue";
+import axios from "@/plugins/axios";
 export default {
   name: "Login",
   components: {
@@ -105,12 +105,38 @@ export default {
     },
     login() {
       if (this.validate()) {
-        console.log(this.validate());
+        let data = {
+          email: this.login_email,
+          password: this.login_password,
+        };
+        this.changeStatus(true);
+        console.log(data);
+        localStorage.setItem("user", data.email);
+        this.$router.push({ path: "/" });
+
+        axios
+          .post("/login", data)
+          .then((res) => {
+            const userName = res.data.userName;
+            localStorage.setItem("user", userName);
+            this.$router.push({ path: "/" });
+          })
+          .catch((err) => {
+            console.log(err);
+            alert(err.response.data.reason);
+          });
       } else {
         console.log("false");
       }
     },
-    guest() {},
+    changeStatus(status) {
+      this.$emit("changeStatus", status);
+    },
+    guest() {
+      localStorage.setItem("user", "guest");
+      this.changeStatus(true);
+      this.$router.push({ path: "/" });
+    },
     validate() {
       return this.$refs.login.validate();
     },

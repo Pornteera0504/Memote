@@ -8,8 +8,8 @@
       dark
     >
       <v-tabs icons-and-text>
-        <v-tab href="/main">
-          Memote
+        <v-tab>
+          <router-link to="/">Memote</router-link>
           <v-icon>mdi-home</v-icon>
         </v-tab>
         <v-tab href="">Item Two</v-tab>
@@ -58,8 +58,7 @@
                 <v-btn
                   color="red darken-1"
                   text
-                  href="/"
-                  @click="logoutDialog = false"
+                  @click="logoutDialog = false || logout()"
                 >
                   Logout
                 </v-btn>
@@ -85,7 +84,7 @@ a {
 <script>
 export default {
   name: "Navigation",
-  props: { isLogin: Boolean, user: String},
+  props: { isLogin: Boolean, user: String },
   data() {
     return {
       logoutDialog: false,
@@ -93,7 +92,11 @@ export default {
   },
   methods: {
     logout() {
+      localStorage.removeItem("user");
       this.message = "";
+      this.$emit("changeStatus", false);
+      this.$router.push({ path: "/login" });
+      location.reload();
     },
   },
 };

@@ -56,13 +56,7 @@
 </template>
 
 <script>
-import Navigation from "@/components/Navigation.vue";
-
 export default {
-  name: "Edit",
-  components: {
-    Navigation,
-  },
   data() {
     return {
       isLogin: true,
@@ -75,9 +69,11 @@ export default {
   methods: {
     save() {
       console.log("save");
+      this.$router.push({ path: "/" });
     },
     cancel() {
       console.log("cancel");
+      this.$router.push({ path: "/" });
     },
   },
 };

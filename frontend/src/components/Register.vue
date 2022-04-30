@@ -8,9 +8,9 @@
         <v-col cols="7">
           <v-text-field
             clearable
-            v-model="name"
+            v-model="username"
             :rules="[rules.required]"
-            label="Name"
+            label="Username"
             required
             outlined
           ></v-text-field>
@@ -56,14 +56,15 @@
     </v-card-text>
   </v-card>
 </template>
+
 <script>
+// import axios from "@/plugins/axios";
 export default {
   name: "Register",
   props: { closeDialog: Function },
   data() {
     return {
-      valid: "",
-      name: "",
+      username: "",
       email: "",
       password: "",
       rules: {
@@ -80,7 +81,29 @@ export default {
   methods: {
     register() {
       if (this.validate()) {
-        console.log(this.validate());
+        let data = {
+          username: this.username,
+          password: this.password,
+          email: this.email,
+        };
+
+        // try {
+        //   axios
+        //     .post("/register", data) //
+        //     .then((res) => {
+        //       alert(res.data);
+        //       localStorage.setItem("token", res.data);
+        //     })
+        //     .catch((err) => {
+        //       alert(err.response.data);
+        //     });
+        // } catch (error) {
+        //   console.log(error);
+        // }
+
+        localStorage.setItem("user", data.username);
+        this.$emit("changeStatus", true);
+        this.$router.push({ path: "/" });
       } else {
         console.log("false");
       }
