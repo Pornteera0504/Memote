@@ -106,29 +106,30 @@ export default {
     login() {
       if (this.validate()) {
         let data = {
-          email: this.login_email,
-          password: this.login_password,
+          email: this.email,
+          password: this.password,
         };
-        this.changeStatus(true);
-        console.log(data);
-        localStorage.setItem("user", data.email);
-        this.$router.push({ path: "/" });
 
+        console.log(data);
         axios
           .post("/login", data)
           .then((res) => {
+            console.log(res);
+            this.changeStatus(true);
             const userName = res.data.userName;
+            console.log(res.data.message);
             localStorage.setItem("user", userName);
             this.$router.push({ path: "/" });
           })
           .catch((err) => {
             console.log(err);
-            alert(err.response.data.reason);
+            // alert(err.response.data.reason);
           });
       } else {
         console.log("false");
       }
     },
+
     changeStatus(status) {
       this.$emit("changeStatus", status);
     },
