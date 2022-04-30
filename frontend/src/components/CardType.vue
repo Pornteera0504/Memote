@@ -3,7 +3,7 @@
     :to="{
       name: 'Tasks',
       path: '/category/:name',
-      params: { id: type.id, name: type.name },
+      params: { id: type.categoryId, name: type.name },
     }"
   >
     <v-card class="mx-auto" max-width="80%" color="blue accent-4" outlined dark>
@@ -12,7 +12,7 @@
       </v-card-title>
       <v-card-text>
         <span class="font-weight-black"> รายละเอียด : </span>
-        {{ type.describ }}
+        {{ type.definition }}
       </v-card-text>
     </v-card>
   </router-link>

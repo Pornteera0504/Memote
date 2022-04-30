@@ -28,7 +28,7 @@ const allTask = async (req, res) => {
         const conn = await pool.getConnection()
         await conn.beginTransaction()
 
-        const userID = req.body.userID
+        const userID = parseInt(req.body.userID)
         if(userID === undefined) return res.status(400).send("UserID not define.")
     
         try {

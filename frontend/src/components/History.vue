@@ -26,10 +26,10 @@
                 {{ task.name }}
               </v-col>
               <v-col cols="4" class="d-flex align-center justify-center">
-                {{ task.date }}
+                {{ task.activityDate }}
               </v-col>
               <v-col cols="4" class="d-flex align-center justify-center">
-                {{ task.record }}
+                {{ task.lastEditDate }}
               </v-col>
             </v-row>
           </v-card>
