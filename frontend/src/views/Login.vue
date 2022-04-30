@@ -103,7 +103,7 @@ export default {
     closeDialog(value) {
       this.registerDialog = value;
     },
-    login() {
+    async login() {
       if (this.validate()) {
         let data = {
           email: this.email,
@@ -111,7 +111,8 @@ export default {
         };
 
         console.log(data);
-        axios
+
+        await axios
           .post("/login", data)
           .then((res) => {
             console.log(res);
@@ -122,8 +123,7 @@ export default {
             this.$router.push({ path: "/" });
           })
           .catch((err) => {
-            console.log(err);
-            // alert(err.response.data.reason);
+            alert(err.response.data.reason);
           });
       } else {
         console.log("false");
@@ -142,6 +142,16 @@ export default {
       return this.$refs.login.validate();
     },
   },
+  mounted(){
+    if (localStorage.getItem("user") == null) {
+      this.isLogin = false;
+      this.$router.push({ path: "/login" });
+    } else if (localStorage.getItem("user") !== null) {
+      this.isLogin = true;
+      this.$router.push({ path: "/" });
+
+    }
+  }
 };
 </script>
 
