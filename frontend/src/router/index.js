@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
-import Landing from "../views/Landing.vue"
+import Landing from "../views/Landing.vue";
+import Tasks from "../views/Tasks.vue";
 
 Vue.use(VueRouter);
 
@@ -16,6 +17,12 @@ const routes = [
     name: "Main",
     component: Landing,
   },
+  {
+    path: "/category/:name",
+    name: "Tasks",
+    component: Tasks,
+    props: true
+  }
 ];
 
 const router = new VueRouter({
