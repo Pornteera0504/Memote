@@ -9,9 +9,7 @@
       </v-col>
     </v-row>
     <v-row class="mx-10 my-5 font-weight-bold text-h5">
-      <v-col cols="4" class="d-flex justify-center align-center"
-        >กิจกรรม</v-col
-      >
+      <v-col cols="4" class="d-flex justify-center align-center">กิจกรรม</v-col>
       <v-col cols="4" class="d-flex justify-center align-center"
         >วันที่ทำกิจกรรม</v-col
       >
@@ -19,7 +17,7 @@
         >วันที่บันทึกกิจกรรม</v-col
       >
     </v-row>
-    <Task :tasks=tasks />
+    <Task :tasks="tasks" />
   </div>
 </template>
 <script>
@@ -60,7 +58,7 @@ export default {
   methods: {
     addTask() {
       this.$router.push({ path: "/edit" });
-    }
-  }
+    },
+  },
 };
 </script>

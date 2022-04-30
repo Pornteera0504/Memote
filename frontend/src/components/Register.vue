@@ -56,9 +56,8 @@
     </v-card-text>
   </v-card>
 </template>
-
 <script>
-// import axios from "@/plugins/axios";
+import axios from "@/plugins/axios";
 export default {
   name: "Register",
   props: { closeDialog: Function },
@@ -82,28 +81,26 @@ export default {
     register() {
       if (this.validate()) {
         let data = {
-          username: this.username,
+          userName: this.username,
           password: this.password,
           email: this.email,
         };
 
-        // try {
-        //   axios
-        //     .post("/register", data) //
-        //     .then((res) => {
-        //       alert(res.data);
-        //       localStorage.setItem("token", res.data);
-        //     })
-        //     .catch((err) => {
-        //       alert(err.response.data);
-        //     });
-        // } catch (error) {
-        //   console.log(error);
-        // }
-
-        localStorage.setItem("user", data.username);
-        this.$emit("changeStatus", true);
-        this.$router.push({ path: "/" });
+        try {
+          axios
+            .post("/register", data)
+            .then((res) => {
+              alert(res.data);
+              localStorage.setItem("user", data.userName);
+              this.$emit("changeStatus", true);
+              this.$router.push({ path: "/" });
+            })
+            .catch((err) => {
+              alert(err.response.data);
+            });
+        } catch (error) {
+          console.log(error);
+        }
       } else {
         console.log("false");
       }

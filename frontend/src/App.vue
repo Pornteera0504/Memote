@@ -4,7 +4,7 @@
       @changeStatus="changeStatus($event)"
       :isLogin="isLogin"
       :user="user"
-      v-show="isLogin"
+      v-if="$route.fullPath != '/login'"
     />
     <router-view @changeStatus="changeStatus($event)" />
     <v-footer app>

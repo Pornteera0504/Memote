@@ -96,7 +96,6 @@ export default {
       this.message = "";
       this.$emit("changeStatus", false);
       this.$router.push({ path: "/login" });
-      location.reload();
     },
   },
 };

@@ -104,9 +104,9 @@ export default {
       else return this.tasks;
     },
   },
-  mounted () {
-    this.getCategory()
-    this.getTask()
+  mounted() {
+    this.getCategory();
+    this.getTask();
   },
   methods: {
     clearMessage() {
@@ -123,11 +123,15 @@ export default {
       this.newTypeDialog = false;
     },
     async getCategory() {
-      await axios.get("/categories").then(response => this.cards = response.data)
+      await axios
+        .get("/categories")
+        .then((response) => (this.cards = response.data));
     },
     async getTask() {
-      await axios.post("/all/tasks", {userID: 3}).then(response => this.tasks = response.data)
-    }
+      await axios
+        .post("/all/tasks", { userID: 3 })
+        .then((response) => (this.tasks = response.data));
+    },
   },
 };
 </script>

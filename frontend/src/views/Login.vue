@@ -4,9 +4,12 @@
     fluid
     class="d-flex flex-column justify-center align-center my-auto"
   >
-    <h1 class="cyan--text text--{lighten}-{1} text-h1 font-weight-black">
+    <a
+      href="/"
+      class="cyan--text text--{lighten}-{1} text-h1 font-weight-black text-decoration-none"
+    >
       Memote
-    </h1>
+    </a>
     <v-col cols="4">
       <v-form class="d-flex flex-column align-center" ref="login">
         <v-col cols="12" class="pb-0 mb-0">
@@ -142,16 +145,12 @@ export default {
       return this.$refs.login.validate();
     },
   },
-  mounted(){
-    if (localStorage.getItem("user") == null) {
-      this.isLogin = false;
-      this.$router.push({ path: "/login" });
-    } else if (localStorage.getItem("user") !== null) {
+  mounted() {
+    if (localStorage.getItem("user") !== null) {
       this.isLogin = true;
       this.$router.push({ path: "/" });
-
     }
-  }
+  },
 };
 </script>
 
