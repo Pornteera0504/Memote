@@ -7,6 +7,7 @@
       >
         <v-col cols="7">
           <v-text-field
+            clearable
             v-model="name"
             :rules="[rules.required]"
             label="Name"
@@ -14,6 +15,7 @@
             outlined
           ></v-text-field>
           <v-text-field
+            clearable
             v-model="email"
             :rules="[rules.required, rules.email]"
             label="Email"
@@ -22,6 +24,7 @@
           ></v-text-field>
 
           <v-text-field
+            clearable
             v-model="password"
             :rules="[rules.required, rules.minPassword]"
             label="Password"
@@ -53,7 +56,6 @@
     </v-card-text>
   </v-card>
 </template>
-
 <script>
 export default {
   name: "Register",

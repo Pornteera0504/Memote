@@ -11,6 +11,7 @@
       <v-form class="d-flex flex-column align-center" ref="login">
         <v-col cols="12" class="pb-0 mb-0">
           <v-text-field
+            clearable
             class="text-h6"
             v-model="email"
             label="Email"
@@ -21,6 +22,7 @@
         </v-col>
         <v-col cols="12" class="py-0">
           <v-text-field
+            clearable
             class="text-h6"
             v-model="password"
             label="Password"
@@ -56,6 +58,7 @@
             large
             color="info"
             class="font-weight-bold"
+            href="/main"
             v-on:click="guest()"
           >
             Guest
