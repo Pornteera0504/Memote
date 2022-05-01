@@ -1,21 +1,13 @@
 <template>
-  <router-link
-    :to="{
-      name: 'Tasks',
-      path: '/category/:name',
-      params: { id: type.categoryId, name: type.name },
-    }"
-  >
-    <v-card class="mx-auto" max-width="80%" color="blue accent-4" outlined dark>
+    <v-card class="mx-auto" max-width="80%" color="blue accent-4" outlined dark @click="selectCategory">
       <v-card-title class="d-flex align-center justify-center">
-        {{ type.name }}
+        {{ category.name }}
       </v-card-title>
       <v-card-text>
         <span class="font-weight-black"> รายละเอียด : </span>
-        {{ type.definition }}
+        {{ category.definition }}
       </v-card-text>
     </v-card>
-  </router-link>
 </template>
 <style scoped>
 a {
@@ -25,9 +17,22 @@ a {
 <script>
 export default {
   name: "CardType",
-  props: {
-    type: { type: Object },
-    name: { type: String, require: true },
+  props: { 
+    category: {
+      type: Object,
+      require: true,
+    },
   },
+  methods: {
+    selectCategory() {
+      this.$router.push({
+        name: 'Tasks',
+        params: { 
+          id: this.category.categoryID,
+          name: this.category.name
+        },
+      })
+    }
+  }
 };
 </script>

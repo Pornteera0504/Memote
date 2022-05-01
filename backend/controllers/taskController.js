@@ -9,7 +9,7 @@ const taskDetail = async (req, res) => {
         if(taskID === undefined) return res.status(400).send("Task ID not define")
 
         try {
-            const querySql = "SELECT taskID, tasks.name, description, activityDate, lastEditDate, categories.name FROM tasks JOIN categories ON tasks.categoryID = categories.categoryID WHERE taskID = ?"
+            const querySql = "SELECT taskID, tasks.name`task_name`, description, activityDate, lastEditDate, categories.name`cate_name` FROM tasks JOIN categories ON tasks.categoryID = categories.categoryID WHERE taskID = ?"
             const [row, _] = await conn.query(querySql, [taskID])
             if(row.length === 0) return res.status(404).send("Not have task data.")
             res.status(200).json(row[0])

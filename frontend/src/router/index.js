@@ -25,10 +25,9 @@ const routes = [
     component: Edit,
   },
   {
-    path: "/category/:name",
+    path: "/category",
     name: "Tasks",
     component: Tasks,
-    props: true,
   },
   {
     path: "/detail",

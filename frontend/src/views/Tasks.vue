@@ -22,6 +22,7 @@
 </template>
 <script>
 import Task from "@/components/Task.vue";
+import axios from "@/plugins/axios";
 
 export default {
   name: "Tasks",
@@ -30,34 +31,20 @@ export default {
   },
   data() {
     return {
-      tasks: [
-        {
-          id: "1",
-          type: "2",
-          name: "ปั่นจักรยาน",
-          date: "20-04-2022",
-          record: "07-04-2022",
-        },
-        {
-          id: "2",
-          type: "1",
-          name: "ทำการบ้าน",
-          date: "20-04-2022",
-          record: "07-04-2022",
-        },
-        {
-          id: "3",
-          type: "3",
-          name: "เปิดบัญชี",
-          date: "20-04-2022",
-          record: "07-04-2022",
-        },
-      ],
+      tasks: [],
     };
+  },
+  mounted() {
+    this.getTask()
   },
   methods: {
     addTask() {
       this.$router.push({ path: "/edit" });
+    },
+    getTask() {
+      axios
+        .post("/matching/tasks", { userID: localStorage.getItem("userID"), categoryID: this.$route.params.id })
+        .then(response => this.tasks = response.data)
     },
   },
 };

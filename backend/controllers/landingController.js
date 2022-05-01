@@ -61,7 +61,7 @@ const categoryTask = async (req, res) => {
         if(categoryID === undefined) return res.status(400).send("CategoryID not define.")
     
         try {
-          const querySql = "SELECT taskID, tasks.name, description, activityDate, lastEditDate, categories.name FROM tasks join categories on tasks.categoryID = categories.categoryID WHERE userID = ? and tasks.categoryID = ?"
+          const querySql = "SELECT taskID, tasks.name`task_name`, description, activityDate, lastEditDate, categories.name`cate_name` FROM tasks join categories on tasks.categoryID = categories.categoryID WHERE userID = ? and tasks.categoryID = ?"
           const [rows, _] = await conn.query(querySql, [userID, categoryID])
           res.status(200).json(rows)
     
