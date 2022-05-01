@@ -93,6 +93,7 @@ export default {
   methods: {
     logout() {
       localStorage.removeItem("user");
+      localStorage.removeItem("userID");
       this.message = "";
       this.$emit("changeStatus", false);
       this.$router.push({ path: "/login" });

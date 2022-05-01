@@ -12,7 +12,7 @@
             </v-subheader>
           </v-col>
           <v-col cols="8">
-            <v-text-field solo clearable v-model="name"> </v-text-field>
+            <v-text-field solo clearable v-model="taskName"> </v-text-field>
           </v-col>
         </v-row>
 
@@ -24,11 +24,10 @@
           </v-col>
           <v-col cols="8">
             <v-select
-              clearable
-              :items="categoryNames"
+              :items="categoriesName"
               v-model="categoryName"
-              label="select"
               solo
+              readonly
             ></v-select>
           </v-col>
         </v-row>
@@ -71,38 +70,44 @@
 
 <script>
 import DatePicker from "@/components/DatePicker.vue";
+import axios from "@/plugins/axios";
 export default {
   name: "Edit",
+  props: ["categoryName", "taskId"],
   components: {
     DatePicker,
-  },
-  props: {
-    
   },
   data() {
     return {
       dateModal: false,
       isLogin: true,
-      name: "",
-      categoryName: "",
+      taskName: "",
       date: "",
       description: "",
-      categoryNames: ["test1", "test2"],
+      categoriesName: [],
     };
   },
   methods: {
-    save() {
+    async save() {
       let data = {
-        taskID: "",
-        userID: "",
-        name: "",
-        description: "",
-        activityDate: "",
+        taskID: this.$route.params.taskId,
+        userID: parseInt(localStorage.getItem("userID")),
+        name: this.taskName,
+        description: this.description,
+        activityDate: this.date,
         categoryName: this.categoryName,
       };
 
       console.log(data);
-      this.$router.push({ path: "/" });
+      await axios
+        .post("/task/modify", data)
+        .then((res) => {
+          console.log(res);
+          this.$router.push({ path: "/" });
+        })
+        .catch((err) => {
+          alert(err.response.data.reason);
+        });
     },
     cancel() {
       this.reset();
@@ -116,8 +121,7 @@ export default {
     },
   },
   mounted() {
-    // this.name = localStorage.getItem("user")
-    console.log( this.$route.params.name );
+    this.categoriesName = [this.$route.params.categoryName]
   },
 };
 </script>

@@ -3,7 +3,7 @@
     <v-row class="mx-10 my-5">
       <v-col col="12" class="mt-3 d-flex justify-space-between">
         <p class="text-h3 font-weight-black">{{ $route.params.name }}</p>
-        <v-btn icon @click="addTask">
+        <v-btn icon @click="addTask($route.params.name)">
           <v-icon x-large>mdi-plus-circle</v-icon>
         </v-btn>
       </v-col>
@@ -35,16 +35,25 @@ export default {
     };
   },
   mounted() {
-    this.getTask()
+    this.getTask();
   },
   methods: {
-    addTask() {
-      this.$router.push({ path: "/edit" });
+    addTask(categoryName) {
+      this.$router.push({
+        name: "Edit",
+        params: {
+          categoryName: categoryName,
+          taskId: 0
+        },
+      });
     },
     getTask() {
       axios
-        .post("/matching/tasks", { userID: localStorage.getItem("userID"), categoryID: this.$route.params.id })
-        .then(response => this.tasks = response.data)
+        .post("/matching/tasks", {
+          userID: localStorage.getItem("userID"),
+          categoryID: this.$route.params.id,
+        })
+        .then((response) => (this.tasks = response.data));
     },
   },
 };

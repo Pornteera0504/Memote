@@ -112,9 +112,6 @@ export default {
           email: this.email,
           password: this.password,
         };
-
-        console.log(data);
-
         await axios
           .post("/login", data)
           .then((res) => {
@@ -137,7 +134,7 @@ export default {
     },
     guest() {
       localStorage.setItem("user", "guest");
-      localStorage.setItem("userID", 0); //set guest user to id 0
+      localStorage.setItem("userID", 1); //set guest user to id 0
       this.changeStatus(true);
       this.$router.push({ path: "/" });
     },
