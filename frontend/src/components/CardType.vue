@@ -1,13 +1,19 @@
 <template>
-    <v-card class="mx-auto amber lighten-4 elevation-12" max-width="80%" outlined @click="selectCategory" dense>
-      <v-card-title class="d-flex align-center justify-center">
-        {{ category.name }}
-      </v-card-title>
-      <v-card-text>
-        <span class="font-weight-black"> รายละเอียด : </span>
-        {{ category.definition }}
-      </v-card-text>
-    </v-card>
+  <v-card
+    class="mx-auto amber lighten-4 elevation-12"
+    max-width="80%"
+    outlined
+    @click="selectCategory"
+    dense
+  >
+    <v-card-title class="d-flex align-center justify-center">
+      {{ category.name }}
+    </v-card-title>
+    <v-card-text>
+      <span class="font-weight-black"> รายละเอียด : </span>
+      {{ category.definition }}
+    </v-card-text>
+  </v-card>
 </template>
 <style scoped>
 a {
@@ -17,7 +23,7 @@ a {
 <script>
 export default {
   name: "CardType",
-  props: { 
+  props: {
     category: {
       type: Object,
       require: true,
@@ -26,13 +32,13 @@ export default {
   methods: {
     selectCategory() {
       this.$router.push({
-        name: 'Tasks',
-        params: { 
+        name: "Tasks",
+        params: {
           id: this.category.categoryID,
-          name: this.category.name
+          name: this.category.name,
         },
-      })
-    }
-  }
+      });
+    },
+  },
 };
 </script>

@@ -22,21 +22,21 @@ a {
 <script>
 export default {
   name: "Task",
-  props: { 
+  props: {
     tasks: {
       type: Array,
-      require: true
-    } 
+      require: true,
+    },
   },
   methods: {
     seeDetail(id) {
       this.$router.push({
-        name: 'Detail',
-        params: { 
+        name: "Detail",
+        params: {
           id: id,
         },
-      })
-    }
-  }
+      });
+    },
+  },
 };
 </script>

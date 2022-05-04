@@ -42,29 +42,17 @@
     </v-card>
 
     <v-row justify="center">
-      <v-dialog
-        v-model="dialog"
-        persistent
-        max-width="290"
-      >
+      <v-dialog v-model="dialog" persistent max-width="290">
         <v-card>
-          <v-card-title class="text-h5">
-            ลบกิจกรรม
-          </v-card-title>
-          <v-card-text>คุณจะลบกิจกรรม {{ task.task_name }} และจะไม่สามารถนำกลับคืนมาได้อีก</v-card-text>
+          <v-card-title class="text-h5"> ลบกิจกรรม </v-card-title>
+          <v-card-text
+            >คุณจะลบกิจกรรม
+            {{ task.task_name }} และจะไม่สามารถนำกลับคืนมาได้อีก</v-card-text
+          >
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-              text
-              @click="dialog = false"
-            >
-              ยกเลิก
-            </v-btn>
-            <v-btn
-              color="red darken-1"
-              text
-              @click="deleteTask"
-            >
+            <v-btn text @click="dialog = false"> ยกเลิก </v-btn>
+            <v-btn color="red darken-1" text @click="deleteTask">
               ยืนยัน
             </v-btn>
           </v-card-actions>
@@ -77,25 +65,25 @@
 import axios from "@/plugins/axios";
 
 export default {
-  name: 'Detail',
+  name: "Detail",
   data() {
-    return{
+    return {
       task: {},
       dialog: false,
-    }
+    };
   },
   mounted() {
-    this.getTask()
+    this.getTask();
   },
   methods: {
     async getTask() {
       await axios
-        .post('/task/detail', { taskID: this.$route.params.id })
-        .then(response => this.task = response.data)
+        .post("/task/detail", { taskID: this.$route.params.id })
+        .then((response) => (this.task = response.data));
     },
     async deleteTask() {
       await axios
-        .delete('/task/delete/' + this.$route.params.id)
+        .delete("/task/delete/" + this.$route.params.id)
         .then((res) => {
           console.log(res.data);
           this.$router.push({ path: "/" });
@@ -103,17 +91,17 @@ export default {
         .catch((err) => {
           alert(err.response.data.reason);
         });
-      this.dialog = false
+      this.dialog = false;
     },
     editTask() {
       this.$router.push({
         name: "Edit",
         params: {
           task: this.task,
-          create: false
-        }
-      })
-    }
-  }
+          create: false,
+        },
+      });
+    },
+  },
 };
 </script>

@@ -94,7 +94,7 @@ export default {
               alert(res.data);
               localStorage.setItem("user", data.userName);
               this.$emit("changeStatus", true);
-              this.closeDialog(false)
+              this.closeDialog(false);
             })
             .catch((err) => {
               alert(err.response.data);

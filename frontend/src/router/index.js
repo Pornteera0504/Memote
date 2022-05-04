@@ -23,13 +23,13 @@ const routes = [
     path: "/edit",
     name: "Edit",
     component: Edit,
-    props: true
+    props: true,
   },
   {
     path: "/category",
     name: "Tasks",
     component: Tasks,
-    props: true
+    props: true,
   },
   {
     path: "/detail",

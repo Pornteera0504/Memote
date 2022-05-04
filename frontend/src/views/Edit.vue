@@ -39,7 +39,7 @@
             </v-subheader>
           </v-col>
           <v-col cols="8">
-            <DatePicker @setDate="setDate($event)" :sendDate="date"/>
+            <DatePicker @setDate="setDate($event)" :sendDate="date" />
           </v-col>
         </v-row>
 
@@ -81,17 +81,27 @@ export default {
     return {
       dateModal: false,
       isLogin: true,
-      taskName: this.$route.params.create ? "" : this.$route.params.task.task_name,
-      date: this.$route.params.create ? "" : this.$route.params.task.activityDate,
-      description: this.$route.params.create ? "" : this.$route.params.task.description,
+      taskName: this.$route.params.create
+        ? ""
+        : this.$route.params.task.task_name,
+      date: this.$route.params.create
+        ? ""
+        : this.$route.params.task.activityDate,
+      description: this.$route.params.create
+        ? ""
+        : this.$route.params.task.description,
       categoriesName: [],
-      categoryName: this.$route.params.create ? this.$props.cateName : this.$route.params.task.cate_name
+      categoryName: this.$route.params.create
+        ? this.$props.cateName
+        : this.$route.params.task.cate_name,
     };
   },
   methods: {
     async save() {
       let data = {
-        taskID: this.$route.params.create ? this.$route.params.taskId : this.$route.params.task.taskID,
+        taskID: this.$route.params.create
+          ? this.$route.params.taskId
+          : this.$route.params.task.taskID,
         userID: parseInt(localStorage.getItem("userID")),
         name: this.taskName,
         description: this.description,
@@ -120,7 +130,11 @@ export default {
     },
   },
   mounted() {
-    this.categoriesName = [this.$route.params.create ? this.$route.params.cateName : this.$route.params.task.cate_name]
+    this.categoriesName = [
+      this.$route.params.create
+        ? this.$route.params.cateName
+        : this.$route.params.task.cate_name,
+    ];
   },
 };
 </script>
