@@ -39,7 +39,7 @@
             </v-subheader>
           </v-col>
           <v-col cols="8">
-            <DatePicker @setDate="setDate($event)" />
+            <DatePicker @setDate="setDate($event)" :sendDate="date"/>
           </v-col>
         </v-row>
 

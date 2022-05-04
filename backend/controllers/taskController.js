@@ -71,7 +71,6 @@ const modifyTask = async (req, res) => {
             }
             else{
                 const categoryID = await validateCategory(categoryName, conn)
-                console.log(categoryID)
                 const updateSql = "UPDATE tasks SET name = ?, description = ?, activityDate = ?, lastEditDate = ?, categoryID = ? WHERE taskID = ?"
                 await conn.query(updateSql, [name, description, activityDate, lastEditDate, categoryID, taskID])
                 statusModify = "Update task data success."

@@ -29,12 +29,11 @@
 <script>
 export default {
   name: "Edit",
+  props: { sendDate: String },
   data() {
     return {
       dateModal: false,
-      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
+      date: this.setDate(),
       dateFormatted: this.formatDate(
         new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
           .toISOString()
@@ -43,6 +42,11 @@ export default {
     };
   },
   methods: {
+    setDate() {
+      return new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10);
+    },
     formatDate(date) {
       if (!date) return null;
       const [year, month, day] = date.split("-");
@@ -55,11 +59,6 @@ export default {
       return `${year}-${day.padStart(2, "0")}-${month.padStart(2, "0")}`;
     },
   },
-  computed: {
-    computedDateFormatted() {
-      return this.formatDate(this.date);
-    },
-  },
   watch: {
     date: function () {
       this.dateFormatted = this.formatDate(this.date);
@@ -67,6 +66,7 @@ export default {
     },
   },
   mounted() {
+    this.date = this.sendDate ? this.parseDate(this.sendDate) : this.setDate();
     this.$emit("setDate", this.dateFormatted);
   },
 };
