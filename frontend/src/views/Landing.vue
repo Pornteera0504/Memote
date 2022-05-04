@@ -2,9 +2,7 @@
   <div class="mb-16">
     <v-row class="my-5 mx-5">
       <v-col cols="12">
-        <h1>
-          หมวดหมู่ของกิจกรรมทั้งหมด
-        </h1>
+        <h1>หมวดหมู่ของกิจกรรมทั้งหมด</h1>
       </v-col>
     </v-row>
     <v-row>
@@ -59,17 +57,30 @@ export default {
   computed: {
     selectedTask() {
       if (this.message)
-        return this.tasks.filter((task) => task.name.toLowerCase().includes(this.message.toLowerCase())).sort((a, b) => {
-          let comA = a.activityDate.split("/")
-          let comB = b.activityDate.split("/")
-          return new Date(comA[1]+"/"+comA[0]+"/"+comA[2]) - new Date(comB[1]+"/"+comB[0]+"/"+comB[2]); 
-        });
-      else return this.tasks.filter((task) => task.name.includes('')).sort((a, b) => {
-          let comA = a.activityDate.split("/")
-          let comB = b.activityDate.split("/")
-          return new Date(comA[1]+"/"+comA[0]+"/"+comA[2]) - new Date(comB[1]+"/"+comB[0]+"/"+comB[2]); 
-        });
-    }
+        return this.tasks
+          .filter((task) =>
+            task.name.toLowerCase().includes(this.message.toLowerCase())
+          )
+          .sort((a, b) => {
+            let comA = a.activityDate.split("/");
+            let comB = b.activityDate.split("/");
+            return (
+              new Date(comA[1] + "/" + comA[0] + "/" + comA[2]) -
+              new Date(comB[1] + "/" + comB[0] + "/" + comB[2])
+            );
+          });
+      else
+        return this.tasks
+          .filter((task) => task.name.includes(""))
+          .sort((a, b) => {
+            let comA = a.activityDate.split("/");
+            let comB = b.activityDate.split("/");
+            return (
+              new Date(comA[1] + "/" + comA[0] + "/" + comA[2]) -
+              new Date(comB[1] + "/" + comB[0] + "/" + comB[2])
+            );
+          });
+    },
   },
   mounted() {
     this.getCategory();
