@@ -59,9 +59,17 @@ export default {
   computed: {
     selectedTask() {
       if (this.message)
-        return this.tasks.filter((task) => task.name.includes(this.message));
-      else return this.tasks;
-    },
+        return this.tasks.filter((task) => task.name.includes(this.message)).sort((a, b) => {
+          let comA = a.activityDate.split("/")
+          let comB = b.activityDate.split("/")
+          return new Date(comA[1]+"/"+comA[0]+"/"+comA[2]) - new Date(comB[1]+"/"+comB[0]+"/"+comB[2]); 
+        });
+      else return this.tasks.filter((task) => task.name.includes('')).sort((a, b) => {
+          let comA = a.activityDate.split("/")
+          let comB = b.activityDate.split("/")
+          return new Date(comA[1]+"/"+comA[0]+"/"+comA[2]) - new Date(comB[1]+"/"+comB[0]+"/"+comB[2]); 
+        });
+    }
   },
   mounted() {
     this.getCategory();
