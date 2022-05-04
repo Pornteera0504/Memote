@@ -58,7 +58,9 @@ export default {
     selectedTask() {
       if (this.message)
         return this.tasks
-          .filter((task) => task.name.includes(this.message))
+          .filter((task) =>
+            task.name.toLowerCase().includes(this.message.toLowerCase())
+          )
           .sort((a, b) => {
             let comA = a.activityDate.split("/");
             let comB = b.activityDate.split("/");
