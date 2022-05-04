@@ -44,7 +44,7 @@ export default {
         params: {
           cateName: categoryName,
           taskId: 0,
-          create: true
+          create: true,
         },
       });
     },

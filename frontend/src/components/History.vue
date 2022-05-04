@@ -19,32 +19,36 @@
     </v-row>
     <v-row class="mx-5">
       <v-col cols="12" v-for="(task, index) in tasks" :key="task.taskID">
-          <v-card class="grey lighten-2" v-if="index % 2 == 0" @click="seeDetail(task.taskID)">
-            <v-row>
-              <v-col cols="4" class="d-flex align-center justify-center">
-                {{ task.name }}
-              </v-col>
-              <v-col cols="4" class="d-flex align-center justify-center">
-                {{ task.activityDate }}
-              </v-col>
-              <v-col cols="4" class="d-flex align-center justify-center">
-                {{ task.lastEditDate }}
-              </v-col>
-            </v-row>
-          </v-card>
-          <v-card v-else @click="seeDetail(task.taskID)">
-            <v-row>
-              <v-col cols="4" class="d-flex align-center justify-center">
-                {{ task.name }}
-              </v-col>
-              <v-col cols="4" class="d-flex align-center justify-center">
-                {{ task.activityDate }}
-              </v-col>
-              <v-col cols="4" class="d-flex align-center justify-center">
-                {{ task.lastEditDate }}
-              </v-col>
-            </v-row>
-          </v-card>
+        <v-card
+          class="grey lighten-2"
+          v-if="index % 2 == 0"
+          @click="seeDetail(task.taskID)"
+        >
+          <v-row>
+            <v-col cols="4" class="d-flex align-center justify-center">
+              {{ task.name }}
+            </v-col>
+            <v-col cols="4" class="d-flex align-center justify-center">
+              {{ task.activityDate }}
+            </v-col>
+            <v-col cols="4" class="d-flex align-center justify-center">
+              {{ task.lastEditDate }}
+            </v-col>
+          </v-row>
+        </v-card>
+        <v-card v-else @click="seeDetail(task.taskID)">
+          <v-row>
+            <v-col cols="4" class="d-flex align-center justify-center">
+              {{ task.name }}
+            </v-col>
+            <v-col cols="4" class="d-flex align-center justify-center">
+              {{ task.activityDate }}
+            </v-col>
+            <v-col cols="4" class="d-flex align-center justify-center">
+              {{ task.lastEditDate }}
+            </v-col>
+          </v-row>
+        </v-card>
       </v-col>
     </v-row>
   </div>
@@ -61,12 +65,12 @@ export default {
   methods: {
     seeDetail(id) {
       this.$router.push({
-        name: 'Detail',
-        params: { 
+        name: "Detail",
+        params: {
           id: id,
         },
-      })
-    }
-  }
+      });
+    },
+  },
 };
 </script>

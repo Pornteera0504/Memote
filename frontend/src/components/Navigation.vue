@@ -9,7 +9,9 @@
       <v-tabs icons-and-text>
         <v-tab>
           <router-link to="/">
-            <span class="cyan--text text--{lighten}-{1} text-h5 font-weight-black"> 
+            <span
+              class="cyan--text text--{lighten}-{1} text-h5 font-weight-black"
+            >
               Memote
             </span>
           </router-link>
@@ -24,7 +26,7 @@
         </v-btn>
 
         <v-btn icon disabled>
-          <span style="font-size: 2rem;" class="mx-1">|</span>
+          <span style="font-size: 2rem" class="mx-1">|</span>
         </v-btn>
 
         <v-row justify="center">
@@ -35,9 +37,7 @@
             max-heignt="20%"
           >
             <template v-slot:activator="{ on, attrs }">
-              <v-btn icon class="mx-1" v-bind="attrs" v-on="on">
-                Logout
-              </v-btn>
+              <v-btn icon class="mx-1" v-bind="attrs" v-on="on"> Logout </v-btn>
             </template>
             <v-card style="overflow: hidden">
               <v-card-title class="text-h5 justify-center align-center my-2">
