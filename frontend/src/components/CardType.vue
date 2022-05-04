@@ -1,5 +1,5 @@
 <template>
-    <v-card class="mx-auto" max-width="80%" color="blue accent-4" outlined dark @click="selectCategory">
+    <v-card class="mx-auto amber lighten-4 elevation-12" max-width="80%" outlined @click="selectCategory" dense>
       <v-card-title class="d-flex align-center justify-center">
         {{ category.name }}
       </v-card-title>

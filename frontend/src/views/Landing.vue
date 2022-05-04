@@ -13,10 +13,10 @@
       </v-col>
     </v-row>
     <v-row class="my-5 mx-5">
-      <v-col cols="10">
+      <v-col cols="9">
         <h1>กิจกรรมทั้งหมด</h1>
       </v-col>
-      <v-col cols="2">
+      <v-col cols="3">
         <v-text-field
           v-model="message"
           label="Search"

@@ -2,7 +2,7 @@
   <div>
     <v-row v-for="task in tasks" :key="task.taskID">
       <v-card
-        class="mx-10 my-2 py-2 cyan lighten-1 white--text font-weight-medium text-h6 d-flex text-center"
+        class="mx-10 my-2 py-2 cyan lighten-4 font-weight-medium text-h6 d-flex text-center"
         width="100%"
         rouded
         @click="seeDetail(task.taskID)"

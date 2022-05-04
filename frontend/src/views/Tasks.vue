@@ -42,7 +42,7 @@ export default {
       this.$router.push({
         name: "Edit",
         params: {
-          categoryName: categoryName,
+          cateName: categoryName,
           taskId: 0,
           create: true
         },

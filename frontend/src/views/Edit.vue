@@ -73,7 +73,7 @@ import DatePicker from "@/components/DatePicker.vue";
 import axios from "@/plugins/axios";
 export default {
   name: "Edit",
-  props: ["categoryName", "taskId", "task"],
+  props: ["cateName", "taskId", "task"],
   components: {
     DatePicker,
   },
@@ -85,6 +85,7 @@ export default {
       date: this.$route.params.create ? "" : this.$route.params.task.activityDate,
       description: this.$route.params.create ? "" : this.$route.params.task.description,
       categoriesName: [],
+      categoryName: this.$route.params.create ? this.$props.cateName : this.$route.params.task.cate_name
     };
   },
   methods: {
@@ -121,8 +122,8 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route.params.task.cate_name);
-    this.categoriesName = [this.$route.params.categoryName]
+    console.log(this.cateName);
+    this.categoriesName = [this.$route.params.create ? this.$route.params.cateName : this.$route.params.task.cate_name]
   },
 };
 </script>

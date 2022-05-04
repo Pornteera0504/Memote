@@ -1,19 +1,19 @@
 <template>
-  <div style="margin-bottom: 3%">
+  <div style="margin-bottom: 3%; z-index: 10">
     <v-app-bar
       class="px-5"
-      color="black accent-4"
+      color="amber lighten-4"
       style="position: fixed; top: 0"
       dense
-      dark
     >
       <v-tabs icons-and-text>
         <v-tab>
-          <router-link to="/">Memote</router-link>
-          <v-icon>mdi-home</v-icon>
+          <router-link to="/">
+            <span class="cyan--text text--{lighten}-{1} text-h5 font-weight-black"> 
+              Memote
+            </span>
+          </router-link>
         </v-tab>
-        <v-tab href="">Item Two</v-tab>
-        <v-tab>Item Three</v-tab>
       </v-tabs>
       <v-spacer />
 
@@ -24,7 +24,7 @@
         </v-btn>
 
         <v-btn icon disabled>
-          <span style="font-size: 2rem; color: white" class="mx-1">|</span>
+          <span style="font-size: 2rem;" class="mx-1">|</span>
         </v-btn>
 
         <v-row justify="center">
@@ -35,7 +35,7 @@
             max-heignt="20%"
           >
             <template v-slot:activator="{ on, attrs }">
-              <v-btn icon class="mx-1" dark v-bind="attrs" v-on="on">
+              <v-btn icon class="mx-1" v-bind="attrs" v-on="on">
                 Logout
               </v-btn>
             </template>
@@ -67,7 +67,7 @@
           </v-dialog>
         </v-row>
       </template>
-      <v-btn icon class="mx-2" v-else>
+      <v-btn icon class="mx-2" dark v-else>
         <span>
           <a href="/"> Login </a>
         </span>
