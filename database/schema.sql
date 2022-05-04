@@ -1,6 +1,6 @@
 create table users (
 userID int AUTO_INCREMENT PRIMARY KEY,
-name varchar(50),
+userName varchar(50),
 email varchar(50),
 image varchar(255),
 status enum('online', 'offline'),

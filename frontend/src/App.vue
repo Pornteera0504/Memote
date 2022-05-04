@@ -1,32 +1,49 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app>
+    <Navigation
+      @changeStatus="changeStatus($event)"
+      :isLogin="isLogin"
+      :user="user"
+      v-if="$route.fullPath != '/login'"
+    />
+    <router-view @changeStatus="changeStatus($event)" />
+    <v-footer app>
+      Memote
+      <span> &copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
+  </v-app>
 </template>
+<script>
+import Navigation from "@/components/Navigation.vue";
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+export default {
+  name: "App",
+  components: {
+    Navigation,
+  },
+  data() {
+    return {
+      isLogin: false,
+      user: "guest",
+    };
+  },
+  methods: {
+    changeStatus(status) {
+      this.isLogin = status;
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("user") == null) {
+      this.isLogin = false;
+      this.$router.push({ path: "/login" });
+    } else if (localStorage.getItem("user") !== null) {
+      this.isLogin = true;
+    }
+  },
+  watch: {
+    isLogin: function () {
+      this.user = localStorage.getItem("user");
+    },
+  },
+};
+</script>
