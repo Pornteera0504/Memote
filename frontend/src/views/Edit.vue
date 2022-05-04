@@ -98,12 +98,10 @@ export default {
         activityDate: this.date,
         categoryName: this.categoryName,
       };
-
-      console.log(data);
       await axios
         .post("/task/modify", data)
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
           this.$router.push({ path: "/" });
         })
         .catch((err) => {
@@ -122,7 +120,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.cateName);
     this.categoriesName = [this.$route.params.create ? this.$route.params.cateName : this.$route.params.task.cate_name]
   },
 };

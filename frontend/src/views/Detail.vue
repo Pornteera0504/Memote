@@ -97,7 +97,7 @@ export default {
       await axios
         .delete('/task/delete/' + this.$route.params.id)
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
           this.$router.push({ path: "/" });
         })
         .catch((err) => {

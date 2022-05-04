@@ -1,5 +1,10 @@
 const { pool } = require("../utilities/databaseConfig")
 
+const formatDate = (input) => {
+    if(input.length !== 2) return '0'+input
+    else return input
+}
+
 const taskDetail = async (req, res) => {
     try {
         const conn = await pool.getConnection()
@@ -41,7 +46,7 @@ const modifyTask = async (req, res) => {
         await conn.beginTransaction()
 
         var today = new Date();
-        var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear()
+        var date = formatDate(today.getDate())+'/'+formatDate(today.getMonth()+1)+'/'+today.getFullYear()
 
         var statusModify
         const taskID = req.body.taskID
