@@ -43,7 +43,8 @@ export default {
         name: "Edit",
         params: {
           categoryName: categoryName,
-          taskId: 0
+          taskId: 0,
+          create: true
         },
       });
     },

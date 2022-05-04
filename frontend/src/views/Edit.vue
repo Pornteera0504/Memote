@@ -73,7 +73,7 @@ import DatePicker from "@/components/DatePicker.vue";
 import axios from "@/plugins/axios";
 export default {
   name: "Edit",
-  props: ["categoryName", "taskId"],
+  props: ["categoryName", "taskId", "task"],
   components: {
     DatePicker,
   },
@@ -81,16 +81,16 @@ export default {
     return {
       dateModal: false,
       isLogin: true,
-      taskName: "",
-      date: "",
-      description: "",
+      taskName: this.$route.params.create ? "" : this.$route.params.task.task_name,
+      date: this.$route.params.create ? "" : this.$route.params.task.activityDate,
+      description: this.$route.params.create ? "" : this.$route.params.task.description,
       categoriesName: [],
     };
   },
   methods: {
     async save() {
       let data = {
-        taskID: this.$route.params.taskId,
+        taskID: this.$route.params.create ? this.$route.params.taskId : this.$route.params.task.taskID,
         userID: parseInt(localStorage.getItem("userID")),
         name: this.taskName,
         description: this.description,
@@ -121,6 +121,7 @@ export default {
     },
   },
   mounted() {
+    console.log(this.$route.params.task.cate_name);
     this.categoriesName = [this.$route.params.categoryName]
   },
 };

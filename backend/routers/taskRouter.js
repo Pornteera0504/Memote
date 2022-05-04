@@ -6,6 +6,6 @@ const { taskDetail, modifyTask, deleteTask } = require('../controllers/taskContr
 
 router.post('/task/detail', taskDetail)
 router.post('/task/modify', modifyTask)
-router.delete('/task/delete', deleteTask)
+router.delete('/task/delete/:id', deleteTask)
 
 module.exports = router

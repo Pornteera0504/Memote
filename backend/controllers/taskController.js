@@ -92,7 +92,8 @@ const deleteTask = async (req, res) => {
     try {
         const conn = await pool.getConnection()
         await conn.beginTransaction()
-        const taskID = req.body.taskID
+        const taskID = req.params.id
+
         if(taskID === undefined) return res.status(404).send("Task id is not define")
 
         try {

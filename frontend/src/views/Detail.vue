@@ -8,7 +8,7 @@
     >
       <v-card-title class="text-h3">
         {{ task.task_name }}
-        <v-btn icon class="mx-2">
+        <v-btn icon class="mx-2" @click="editTask">
           <v-icon x-large>mdi-circle-edit-outline</v-icon>
         </v-btn>
         <v-btn icon class="mx-2" @click="dialog = true">
@@ -94,12 +94,26 @@ export default {
         .then(response => this.task = response.data)
     },
     async deleteTask() {
-      console.log(this.$route.params.id);
       await axios
-        .delete('/task/delete', { taskID: this.$route.params.id })
-        .then(this.$router.push({name: 'Main'}))
+        .delete('/task/delete/' + this.$route.params.id)
+        .then((res) => {
+          console.log(res);
+          this.$router.push({ path: "/" });
+        })
+        .catch((err) => {
+          alert(err.response.data.reason);
+        });
       this.dialog = false
     },
+    editTask() {
+      this.$router.push({
+        name: "Edit",
+        params: {
+          task: this.task,
+          create: false
+        }
+      })
+    }
   }
 };
 </script>
