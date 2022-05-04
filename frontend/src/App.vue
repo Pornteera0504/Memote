@@ -6,7 +6,7 @@
       :user="user"
       v-if="$route.fullPath != '/login'"
     />
-    <router-view class="mb-16" @changeStatus="changeStatus($event)" />
+    <router-view @changeStatus="changeStatus($event)" />
     <v-footer app>
       Memote
       <span> &copy; {{ new Date().getFullYear() }}</span>

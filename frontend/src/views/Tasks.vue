@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-16">
     <v-row class="mx-10 my-5">
       <v-col col="12" class="mt-3 d-flex justify-space-between">
         <p class="text-h3 font-weight-black">{{ $route.params.name }}</p>
