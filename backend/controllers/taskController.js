@@ -1,7 +1,7 @@
 const { pool } = require("../utilities/databaseConfig")
 
 const formatDate = (input) => {
-    if(input.length !== 2) return '0'+input
+    if(input.toString().length !== 2) return '0'+input
     else return input
 }
 
